@@ -30,13 +30,13 @@ class SessionController extends Controller
         }
 
         request()->session()->regenerate();
-        return redirect()->route('dashboard.index');
+        return redirect()->route('facilities.index');
     }
 
     public function destroy()
     {
         Auth::logout();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

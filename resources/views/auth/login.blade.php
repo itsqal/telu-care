@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login - TelU Care')
+@section('title', 'Login | TelU Care')
 
 @section('content')
 <div class="flex flex-col h-full relative">
@@ -18,17 +18,17 @@
                 <div class="space-y-2">
                     <label for="email" class="block text-sm font-medium">Email</label>
                     <input type="text" value="{{ old('email') }}" name="email" placeholder="Masukan email pegawai"
-                        class="w-full p-2 border rounded-lg placeholder:text-sm" required>
+                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none" required>
                 </div>
 
                 <div class="space-y-2">
                     <label for="password" class="block text-sm font-medium">Password</label>
                     <input type="password" name="password" placeholder="Masukan password"
-                        class="w-full p-2 border rounded-lg placeholder:text-sm">
+                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none">
                 </div>
 
                 <div class="flex justify-end">
-                    <a href="#"><span class="text-sm text-[#637381]">Lupa Password?</span></a>
+                    <a href="#"><span class="text-sm text-[#637381] hover:underline">Lupa Password?</span></a>
                 </div>
 
                 @if ($errors->any())
@@ -41,12 +41,12 @@
                 @endif
 
                 <button type="submit"
-                    class="w-full bg-[var(--color-purple-main)] text-white font-bold py-2 rounded-lg hover:opacity-90">
+                    class="w-full bg-[var(--color-red-main)] text-white font-bold py-2 rounded-lg hover:opacity-90">
                     MASUK
                 </button>
 
                 <p class="text-center text-sm">Belum memiliki akun?
-                    <a href="/register" class="text-[var(--color-purple-main)]">Daftar</a>
+                    <a href="/register" class="text-[var(--color-red-main)] hover:text-[var(--color-dark-red)] hover:underline">Daftar</a>
                 </p>
             </form>
         </div>
