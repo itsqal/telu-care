@@ -11,6 +11,8 @@
     --font-sans: 'roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
+    --color-red-main: #C00000;
+    --color-dark-red: #A00000;
     --color-purple-main: #9A1957;
     --color-blue-main: #1775B5;
 }
