@@ -33,7 +33,28 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'location' => 'required|string|max:255',
+            'description' => 'required|string',
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov|max:20480',
+        ]);
+
+        $path = null;
+        if ($request->hasFile('media')) {
+            $path = $request->file('media')->store('reports', 'public');
+        }
+
+        Report::create([
+            'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
+            'location' => $request->location,
+            'description' => $request->description,
+            'media_path' => $path,
+            'status' => 'Menunggu',
+        ]);
+
+        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dikirim.');
     }
 
     /**

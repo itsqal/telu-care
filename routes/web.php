@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
 
 Route::redirect('/', '/login');
 
@@ -18,4 +19,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
     Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('reports', ReportController::class);
 });
