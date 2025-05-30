@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FollowUp;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class FollowUpController extends Controller
@@ -14,7 +16,7 @@ class FollowUpController extends Controller
 
     public function create()
     {
-        $reports = Report::all(); // ambil semua laporan
+        $reports = Report::all(); // Ambil semua laporan
         return view('follow_ups.create', compact('reports'));
     }
 
@@ -22,12 +24,15 @@ class FollowUpController extends Controller
     {
         $request->validate([
             'report_id' => 'required|exists:reports,id',
-            'response' => 'required',
-            'status' => 'required|in:Diproses,Selesai',
+            'response'  => 'required',
+            'status'    => 'required|in:Diproses,Selesai',
         ]);
 
         FollowUp::create($request->all());
-        return redirect()->route('follow_ups.index')->with('success', 'Tindak lanjut berhasil ditambahkan.');
+
+        return redirect()
+            ->route('follow_ups.index')
+            ->with('success', 'Tindak lanjut berhasil ditambahkan.');
     }
 
     public function edit(FollowUp $followUp)
@@ -40,17 +45,23 @@ class FollowUpController extends Controller
     {
         $request->validate([
             'report_id' => 'required|exists:reports,id',
-            'response' => 'required',
-            'status' => 'required|in:Diproses,Selesai',
+            'response'  => 'required',
+            'status'    => 'required|in:Diproses,Selesai',
         ]);
 
         $followUp->update($request->all());
-        return redirect()->route('follow_ups.index')->with('success', 'Tindak lanjut berhasil diperbarui.');
+
+        return redirect()
+            ->route('follow_ups.index')
+            ->with('success', 'Tindak lanjut berhasil diperbarui.');
     }
 
     public function destroy(FollowUp $followUp)
     {
         $followUp->delete();
-        return redirect()->route('follow_ups.index')->with('success', 'Tindak lanjut berhasil dihapus.');
+
+        return redirect()
+            ->route('follow_ups.index')
+            ->with('success', 'Tindak lanjut berhasil dihapus.');
     }
 }
