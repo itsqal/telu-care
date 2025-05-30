@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 
+
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
@@ -30,3 +31,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/scan', function () {
     return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
 })->name('scan.qr');
+
+
