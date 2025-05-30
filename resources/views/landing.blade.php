@@ -2,109 +2,90 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Tel-U Care</title>
+    <title>Tel-U Care | Sistem Pelaporan Fasilitas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gradient-to-b from-[#a10808] to-[#5c0000] min-h-screen flex flex-col font-sans text-gray-800 scroll-smooth">
+<body class="bg-gradient-to-b from-red-800 to-red-950 min-h-screen flex flex-col font-sans text-gray-900 scroll-smooth">
 
     {{-- Navbar --}}
-    <header class="bg-white shadow py-3 px-6 flex justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center space-x-2">
-            <img src="{{ asset('images/logo.png') }}" class="w-8" alt="Logo">
+    <header class="bg-white shadow-md py-3 px-6 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logo.png') }}" class="w-10" alt="Logo Tel-U">
             <div>
-                <h1 class="text-red-700 font-bold text-lg">Tel-U Care</h1>
-                <p class="text-xs text-gray-500 -mt-1">Sistem Pelaporan Fasilitas</p>
+                <h1 class="text-red-700 font-bold text-xl">Tel-U Care</h1>
+                <p class="text-xs text-gray-600 -mt-1">Sistem Pelaporan Fasilitas Kampus</p>
             </div>
         </div>
 
-        <div class="flex items-center space-x-3">
-            <a href="{{ route('login') }}" class="border border-red-700 text-red-700 px-4 py-1.5 rounded-full text-sm hover:bg-red-700 hover:text-white transition">
+        <div class="flex items-center gap-2">
+            <a href="{{ route('login') }}" class="text-sm font-semibold text-red-700 border border-red-700 px-4 py-2 rounded-full hover:bg-red-700 hover:text-white transition duration-300">
                 Masuk
             </a>
-            <a href="{{ route('register') }}" class="bg-red-700 text-white px-4 py-1.5 rounded-full text-sm hover:bg-red-800 transition">
+            <a href="{{ route('register') }}" class="text-sm font-semibold bg-red-700 text-white px-4 py-2 rounded-full hover:bg-red-800 transition duration-300">
                 Daftar Sekarang
             </a>
         </div>
     </header>
 
     {{-- Hero Section --}}
-    <main class="flex justify-center items-center px-6 py-16">
-        <div class="bg-white p-10 rounded-2xl text-center max-w-3xl shadow-xl border-t-4 border-red-600">
-            <h2 class="text-4xl font-bold text-purple-800 mb-2">Tel-U Care</h2>
-            <h3 class="text-lg text-red-700 font-semibold mb-4">Sistem Pelaporan Fasilitas Telkom University</h3>
-            <div class="w-20 h-1 bg-red-600 mx-auto mb-6 rounded"></div>
+    <main class="flex justify-center items-center px-6 py-20">
+        <div class="bg-white p-10 rounded-2xl text-center max-w-3xl shadow-lg border-t-4 border-red-700 animate-fadeIn">
+            <h2 class="text-4xl font-bold text-red-800 mb-2">Tel-U Care</h2>
+            <h3 class="text-lg text-red-600 font-semibold mb-4">Solusi Digital Pelaporan Fasilitas Telkom University</h3>
+            <div class="w-24 h-1 bg-red-700 mx-auto mb-6 rounded-full"></div>
 
-            <p class="text-gray-700 leading-relaxed mb-8">
-                Platform terintegrasi untuk melaporkan dan mengelola fasilitas kampus Telkom University.
-                Memungkinkan seluruh civitas akademika melaporkan kerusakan fasilitas secara real-time,
-                terdokumentasi, dan responsif untuk menciptakan lingkungan kampus yang lebih nyaman dan produktif.
+            <p class="text-gray-700 text-sm leading-relaxed mb-8">
+                Sistem pelaporan fasilitas kampus yang <strong>terintegrasi</strong>, <strong>real-time</strong>, dan <strong>akuntabel</strong>. 
+                Dirancang khusus untuk menciptakan kampus Telkom University yang lebih <span class="text-red-700 font-semibold">nyaman</span> dan <span class="text-red-700 font-semibold">produktif</span>.
             </p>
 
             <div class="flex justify-center gap-4">
                 <a href="{{ route('login') }}" class="bg-red-700 text-white font-semibold px-6 py-2 rounded-full shadow hover:bg-red-800 transition">
-                    Laporkan Kerusakan
+                    📢 Laporkan Sekarang
                 </a>
                 <a href="#permasalahan" class="border border-red-700 text-red-700 font-semibold px-6 py-2 rounded-full hover:bg-red-700 hover:text-white transition">
-                    Scan QR Fasilitas
+                    📷 Scan QR Fasilitas
                 </a>
             </div>
         </div>
     </main>
 
     {{-- Permasalahan Section --}}
-    <section id="permasalahan" class="px-6 py-16 text-gray-800">
-        <div class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-md">
-            <h2 class="text-3xl font-bold text-red-700 text-center mb-4">Permasalahan yang Dihadapi</h2>
+    <section id="permasalahan" class="px-6 py-20 bg-white rounded-t-3xl shadow-inner">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-red-800 text-center mb-6">Kenapa Tel-U Butuh Ini?</h2>
             <p class="text-center text-gray-600 mb-10">
-                Fasilitas umum di lingkungan kampus Telkom University memiliki peran penting dalam menunjang kenyamanan dan produktivitas civitas akademika.
-                Namun, saat ini masih terdapat beberapa permasalahan dalam sistem pelaporan kerusakan fasilitas.
+                Fasilitas kampus kita harus dijaga. Tapi tanpa sistem pelaporan yang modern dan cepat, perbaikan bisa tertunda. Ini masalahnya:
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white border border-red-200 p-5 rounded-xl shadow-sm">
-                    <h3 class="font-semibold text-red-700 text-lg mb-1">📚 Kerusakan Fasilitas Tidak Terlaporkan</h3>
-                    <p class="text-sm text-gray-700">
-                        Bangku taman, toilet, lampu penerangan, hingga sarana olahraga sering mengalami kerusakan namun tidak ada sistem pelaporan yang terintegrasi dan mudah diakses.
-                    </p>
+                @foreach ([
+                    ['icon' => '📚', 'title' => 'Fasilitas Tidak Terlaporkan', 'desc' => 'Sering rusak, tapi tidak ada yang tahu karena tidak dilaporkan.'],
+                    ['icon' => '📝', 'title' => 'Pelaporan Manual Tidak Efektif', 'desc' => 'Disampaikan lisan/media sosial — rawan lupa & tidak terdokumentasi.'],
+                    ['icon' => '🕐', 'title' => 'Tindak Lanjut Lambat', 'desc' => 'Tanpa sistem tracking, laporan mudah terabaikan.'],
+                    ['icon' => '📊', 'title' => 'Kurangnya Data Analitik', 'desc' => 'Tidak ada insight lokasi mana yang sering rusak.'],
+                ] as $item)
+                <div class="bg-white border border-red-100 p-5 rounded-xl shadow-sm hover:shadow-md transition duration-200">
+                    <h3 class="font-semibold text-red-700 text-lg mb-1">{{ $item['icon'] }} {{ $item['title'] }}</h3>
+                    <p class="text-sm text-gray-700">{{ $item['desc'] }}</p>
                 </div>
-                <div class="bg-white border border-red-200 p-5 rounded-xl shadow-sm">
-                    <h3 class="font-semibold text-red-700 text-lg mb-1">📝 Pelaporan Manual Tidak Efektif</h3>
-                    <p class="text-sm text-gray-700">
-                        Laporan hanya disampaikan secara lisan, melalui media sosial, atau tidak disampaikan sama sekali, sehingga tidak terdokumentasi dengan baik.
-                    </p>
-                </div>
-                <div class="bg-white border border-red-200 p-5 rounded-xl shadow-sm">
-                    <h3 class="font-semibold text-red-700 text-lg mb-1">🕐 Tindak Lanjut Tidak Optimal</h3>
-                    <p class="text-sm text-gray-700">
-                        Proses perbaikan menjadi lambat bahkan dapat terabaikan sepenuhnya karena tidak ada sistem tracking yang jelas.
-                    </p>
-                </div>
-                <div class="bg-white border border-red-200 p-5 rounded-xl shadow-sm">
-                    <h3 class="font-semibold text-red-700 text-lg mb-1">📊 Kurangnya Data Analisis</h3>
-                    <p class="text-sm text-gray-700">
-                        Tidak ada data yang dapat digunakan untuk menganalisis area yang rawan kerusakan dan perencanaan pemeliharaan yang efektif.
-                    </p>
-                </div>
+                @endforeach
             </div>
 
             {{-- Statistik --}}
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
-                <div class="bg-red-700 text-white p-6 rounded-xl text-center shadow-md">
-                    <h4 class="text-3xl font-bold">50+</h4>
-                    <p class="text-sm">Fasilitas Kampus</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 text-white">
+                @foreach ([
+                    ['value' => '50+', 'label' => 'Fasilitas Kampus'],
+                    ['value' => '25,000+', 'label' => 'Civitas Akademika'],
+                    ['value' => 'Real-time', 'label' => 'Pelaporan & Tracking'],
+                    ['value' => '24/7', 'label' => 'Sistem Aktif'],
+                ] as $stat)
+                <div class="bg-red-700 p-6 rounded-xl text-center shadow-md">
+                    <h4 class="text-3xl font-bold">{{ $stat['value'] }}</h4>
+                    <p class="text-sm">{{ $stat['label'] }}</p>
                 </div>
-                <div class="bg-red-700 text-white p-6 rounded-xl text-center shadow-md">
-                    <h4 class="text-3xl font-bold">25,000+</h4>
-                    <p class="text-sm">Civitas Akademika</p>
-                </div>
-                <div class="bg-red-700 text-white p-6 rounded-xl text-center shadow-md">
-                    <h4 class="text-3xl font-bold">Real-time</h4>
-                    <p class="text-sm">Pelaporan & Tracking</p>
-                </div>
-                <div class="bg-red-700 text-white p-6 rounded-xl text-center shadow-md">
-                    <h4 class="text-3xl font-bold">24/7</h4>
-                    <p class="text-sm">Sistem Aktif</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
