@@ -32,4 +32,5 @@ Route::get('/scan', function () {
     return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
 })->name('scan.qr');
 
-
+//TES MANAJEMEN TINDAK LANJUT
+Route::resource('follow_ups', FollowUpController::class)->middleware('auth');
