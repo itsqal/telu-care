@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 
-Route::redirect('/', '/login');
+Route::get('/', function () {
+    return view('landing');
+})->name('landing');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionController::class, 'create'])->name('login');
@@ -24,3 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('reports', ReportController::class);
 });
+
+Route::get('/scan', function () {
+    return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
+})->name('scan.qr');
