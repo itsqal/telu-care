@@ -31,5 +31,3 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/scan', function () {
     return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
 })->name('scan.qr');
-
-
