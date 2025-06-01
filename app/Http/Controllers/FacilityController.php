@@ -82,7 +82,7 @@ class FacilityController extends Controller
             echo $qrImage;
         }, 200, [
             'Content-Type' => 'image/png',
-            'Content-Disposition' => 'attachment; filename="qr-code-' . $facility->name . '.png"',
+            'Content-Disposition' => 'attachment; filename="QR-' . $facility->name . '-' . $facility->location . '.png"',
         ]);
     }
 }

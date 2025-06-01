@@ -37,7 +37,7 @@
                                     <!-- QR Code placeholder -->
                                     <div class="flex flex-col items-center justify-center space-y-2">
                                         <img src="{{ asset('images/QR-code-animation.png') }}" alt="QR Code"
-                                            class="w-100 h-100 object-contain rounded-lg" />                                        <!-- Download button -->
+                                            class="w-100 h-100 object-contain rounded-lg" /> <!-- Download button -->
                                         <a :href="'{{ url('/admin/facility/qr-code/download') }}/' + currentFacility?.id"
                                             class="w-full flex items-center justify-center gap-2 bg-[var(--color-red-main)] hover:opacity-90 text-white py-2 rounded-lg transition cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
