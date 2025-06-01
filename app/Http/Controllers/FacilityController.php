@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Facility;
 use Illuminate\Http\Request;
+use BaconQrCode\Renderer\GDLibRenderer;
+use BaconQrCode\Writer;
 
 class FacilityController extends Controller
 {
@@ -55,5 +57,32 @@ class FacilityController extends Controller
         $facility->update($validated);
 
         return redirect()->route('facilities.index')->with('success', 'Fasilitas berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $facility = Facility::findOrFail($id);
+        $facility->delete();
+
+        return redirect()->route('facilities.index')->with('success', 'Fasilitas berhasil dihapus');
+    }
+
+    public function downloadQRCode($id)
+    {
+        $facility = Facility::findOrFail($id);
+        
+        $url = route('scan.qr'); 
+
+        $renderer = new GDLibRenderer(500);
+
+        $writer = new Writer($renderer);
+        $qrImage = $writer->writeString($url);
+    
+        return response()->stream(function () use ($qrImage) {
+            echo $qrImage;
+        }, 200, [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="qr-code-' . $facility->name . '.png"',
+        ]);
     }
 }

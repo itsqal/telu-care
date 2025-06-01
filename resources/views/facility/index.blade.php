@@ -3,7 +3,7 @@
 @section('title', 'Dashboard | TelU Care')
 
 @section('content')
-<div>
+<div x-data="{ showDeleteModal: false, showQRModal: false, deleteUrl: '', currentFacility: null }">
     <section class="ml-[18%]">
         <div class="px-4">
             <!-- Start coding here -->
@@ -62,8 +62,9 @@
                                 <td class="px-4 py-3">{{ $facility->room_number }}</td>
                                 <td class="px-4 py-3 text-left whitespace-normal break-words">{{ $facility->description
                                     }}</td>
-                                <td class="flex justify-around space-x-1 mr-1">
-                                    <button class="text-white text-xs font-medium bg-[#004BA4] rounded-lg p-2 my-2 cursor-pointer hover:opacity-90">QR</button>
+                                <td class="flex justify-around space-x-1 mr-1"> <button
+                                        @click="showQRModal = true; currentFacility = {{ json_encode($facility) }}"
+                                        class="text-white text-xs font-medium bg-[#004BA4] rounded-lg p-2 my-2 cursor-pointer hover:opacity-90">QR</button>
                                     <a href="{{ route('facilities.edit', $facility->id) }}"
                                         class="text-white bg-[#FFB700] rounded-lg p-2 my-2 cursor-pointer hover:opacity-90 inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -73,6 +74,7 @@
                                         </svg>
                                     </a>
                                     <button
+                                        @click="showDeleteModal = true; deleteUrl = '{{ route('facilities.destroy', $facility->id) }}'"
                                         class="text-white bg-[#C30010] rounded-lg p-2 my-2 cursor-pointer hover:opacity-90">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor" class="size-4">
@@ -92,6 +94,11 @@
             </div>
         </div>
     </section>
+
+    <x-modal.delete-confirmation title="Hapus Fasilitas"
+        message="Apakah Anda yakin ingin menghapus fasilitas ini? Aksi ini tidak dapat dibatalkan." />
+
+    <x-modal.qr-download />
 </div>
 
 <script>

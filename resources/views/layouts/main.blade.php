@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link rel="icon" href="{{ asset('appicon.ico')}}" type="image/x-icon">
     @vite('resources/css/app.css')
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="flex min-h-screen">

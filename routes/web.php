@@ -33,6 +33,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/facilities/create', [FacilityController::class, 'store'])->name('facilities.store');
     Route::get('/admin/facilities/edit/{id}', [FacilityController::class, 'edit'])->name('facilities.edit');
     Route::put('/admin/facilities/edit/{id}', [FacilityController::class, 'update'])->name('facilities.update');
+    Route::delete('/admin/facilities/{id}', [FacilityController::class, 'destroy'])->name('facilities.destroy');
+
+    Route::get('/admin/facility/qr-code/download/{id}', [FacilityController::class, 'downloadQRCode'])->name('facilities.qr-code');
 
     // tambakan route admin report di sini
 });
