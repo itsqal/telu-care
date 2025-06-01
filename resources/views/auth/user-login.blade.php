@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Register | TelU Care')
+@section('title', 'Login | TelU Care')
 
 @section('content')
 <div class="flex flex-col h-full relative">
@@ -10,18 +10,11 @@
     <div class="flex-1 flex items-center justify-center">
         <div class="w-full max-w-sm space-y-4 pl-8">
             <div class="text-center space-y-1">
-                <h2 class="text-xl font-bold mt-16">Mulai Bergabung Sekarang!</h2>
-                <p class="text-[#787878] text-sm">Daftar menggunakan akun pegawai untuk bisa memiliki akses dashboard
-                </p>
+                <h2 class="text-xl font-bold">Selamat Datang Kembali!</h2>
+                <p class="text-[#787878] text-sm">Masuk Sekarang untuk mengakses dashboard</p>
             </div>
-            <form action="/register " method="POST" class="space-y-3">
+            <form action="/login" method="POST" class="space-y-3">
                 @csrf
-                <div class="space-y-2">
-                    <label for="name" class="block text-sm font-medium">Nama Lengkap</label>
-                    <input type="text" value="{{ old('name') }}" name="name" placeholder="Masukan nama lengkap anda"
-                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none" required>
-                </div>
-
                 <div class="space-y-2">
                     <label for="email" class="block text-sm font-medium">Email</label>
                     <input type="text" value="{{ old('email') }}" name="email" placeholder="Masukan email anda"
@@ -31,13 +24,7 @@
                 <div class="space-y-2">
                     <label for="password" class="block text-sm font-medium">Password</label>
                     <input type="password" name="password" placeholder="Masukan password"
-                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none" required>
-                </div>
-
-                <div class="space-y-2">
-                    <label for="password_confirmation" class="block text-sm font-medium">Konfirmasi Password</label>
-                    <input type="password" name="password_confirmation" placeholder="Masukan konfirmasi password"
-                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none" required>
+                        class="text-sm w-full p-2 border rounded-lg placeholder:text-sm focus:ring-[var(--color-dark-red)] focus:ring-1 focus:outline-none">
                 </div>
 
                 <div class="flex justify-end">
@@ -55,11 +42,11 @@
 
                 <button type="submit"
                     class="w-full bg-[var(--color-red-main)] text-white font-bold py-2 rounded-lg hover:opacity-90">
-                    DAFTAR
+                    MASUK
                 </button>
 
-                <p class="text-center text-sm">Sudah memiliki akun?
-                    <a href="{{ route('login.user') }}" class="text-[var(--color-red-main)] hover:text-[var(--color-dark-red)] hover:underline">Masuk</a>
+                <p class="text-center text-sm">Belum memiliki akun?
+                    <a href="{{ route('register') }}" class="text-[var(--color-red-main)] hover:text-[var(--color-dark-red)] hover:underline">Daftar</a>
                 </p>
             </form>
         </div>

@@ -3,31 +3,35 @@
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReportController;
 
 
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
+// Guest
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [SessionController::class, 'create'])->name('login');
-    Route::post('/login', [SessionController::class, 'store']);
+    Route::get('/login/admin', [SessionController::class, 'createAdmin'])->name('login.admin');
+    Route::get('/login/user', [SessionController::class, 'createUser'])->name('login.user');
+
+    Route::post('/login/admin', [SessionController::class, 'storeAdmin'])->name('login.admin');
+
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
     Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
+});
+
+// Admin
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('reports', ReportController::class);
+// User
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/scan', function () {
+        return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
+    })->name('scan.qr');
 });
-
-Route::get('/scan', function () {
-    return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
-})->name('scan.qr');

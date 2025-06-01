@@ -7,18 +7,28 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
-    public function create()
+    public function createAdmin()
     {
-        return view('auth.login');
+        return view('auth.admin-login');
     }
 
-    public function store()
+    public function createUser()
+    {
+        return view('auth.user-login');
+    }
+
+    public function storeAdmin()
     {
         $attributes = request()->validate([
-            'email' => ['required', 'email'],
+            'email' => [
+                'required',
+                'email',
+                'regex:/^[^@\s]+@employee\.telkomuniversity\.ac\.id$/i'
+            ],
             'password' => ['required']
         ], [
             'email.email' => 'Format email tidak valid. Pastikan format email sudah benar.',
+            'email.regex' => 'Email harus menggunakan domain @employee.telkom.ac.id.',
             'email.required' => 'Mohon isi email dan password.',
             'password.required' => 'Mohon isi email dan password.'
         ]);
@@ -37,6 +47,6 @@ class SessionController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect('/');
     }
 }
