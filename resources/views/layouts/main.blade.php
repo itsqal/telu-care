@@ -11,7 +11,7 @@
 </head>
 
 <body class="flex min-h-screen">
-    <nav class="w-1/6 h-screen bg-[var(--color-red-main)] p-4 flex flex-col space-y-2 rounded-tr-lg rounded-br-lg">
+    <aside class="p-4 space-y-2 rounded-tr-lg rounded-br-lg w-1/6 bg-[var(--color-red-main)] h-full fixed inset-y-0 left-0 flex flex-col justify-between z-50">
         <div class="flex items-center justify-start gap-2 mb-6">
             <img class="w-8" src="{{ asset('images/logo.png') }}" alt="">
             <span class="text-white text-lg font-semibold">Tel-U Care</span>
@@ -42,9 +42,18 @@
                 Keluar
             </button>
         </form>
-    </nav>
+    </aside>
+    
+    <div class="flex flex-col w-full">
+        {{-- top navbar component --}}
+        <nav class="bg-white p-4 shadow-md text-right items-center sticky z-10 top-0">
+            <div class="flex flex-col text-right">
+                <span class="font-medium font-poppins text-sm"><a href="#"></a>{{ Auth::user()->email }}</span>
+                <span class="font-normal font-poppins text-sm text-[#64748B]">{{ Auth::user()->name }}</span>
+            </div>
+        </nav>
 
-    <div class="flex-1 p-4">
+        {{-- main content --}}
         @yield('content')
     </div>
 </body>

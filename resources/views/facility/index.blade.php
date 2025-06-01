@@ -4,7 +4,7 @@
 
 @section('content')
 <div>
-    <section class="-mt-10">
+    <section class="ml-[18%]">
         <div class="px-4">
             <!-- Start coding here -->
             <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
