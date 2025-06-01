@@ -32,4 +32,28 @@ class FacilityController extends Controller
 
         return redirect()->route('facilities.index')->with('success', 'Fasilitas berhasil ditambahkan');
     }
+
+    public function edit($id)
+    {
+        $facility = Facility::findOrFail($id);
+
+        return view('facility.edit', compact('facility'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $facility = Facility::findOrFail($id);
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'floor' => 'integer|nullable',
+            'room_number' => 'string|max:50|nullable',
+            'description' => 'string|nullable'
+        ]);
+
+        $facility->update($validated);
+
+        return redirect()->route('facilities.index')->with('success', 'Fasilitas berhasil diperbarui');
+    }
 }

@@ -31,6 +31,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/facilities', [FacilityController::class, 'index'])->name('facilities.index');
     Route::get('/admin/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
     Route::post('/admin/facilities/create', [FacilityController::class, 'store'])->name('facilities.store');
+    Route::get('/admin/facilities/edit/{id}', [FacilityController::class, 'edit'])->name('facilities.edit');
+    Route::put('/admin/facilities/edit/{id}', [FacilityController::class, 'update'])->name('facilities.update');
 
     // tambakan route admin report di sini
 });
