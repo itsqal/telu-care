@@ -26,10 +26,15 @@ class RegisteredUserController extends Controller
             'email.email' => 'Format email tidak valid. Pastikan format email sudah benar.'
         ]);
 
-        $user =  User::create($attributes);
+        $user = User::create([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'password' => bcrypt($attributes['password']),
+            'role' => 'user',
+        ]);
 
         Auth::login($user);
         
-        return redirect()->route('facilities.index');
+        return redirect()->route('reports.create');
     }
 }

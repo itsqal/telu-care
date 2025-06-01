@@ -13,7 +13,7 @@
                 <h2 class="text-xl font-bold">Selamat Datang Kembali!</h2>
                 <p class="text-[#787878] text-sm">Masuk Sekarang untuk mengakses dashboard</p>
             </div>
-            <form action="/login" method="POST" class="space-y-3">
+            <form action="/login/user" method="POST" class="space-y-3">
                 @csrf
                 <div class="space-y-2">
                     <label for="email" class="block text-sm font-medium">Email</label>

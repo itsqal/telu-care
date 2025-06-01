@@ -43,6 +43,27 @@ class SessionController extends Controller
         return redirect()->route('facilities.index');
     }
 
+     public function storeUser()
+    {
+        $attributes = request()->validate([
+            'email' => [ 'required', 'email' ],
+            'password' => ['required']
+        ], [
+            'email.email' => 'Format email tidak valid. Pastikan format email sudah benar.',
+            'email.required' => 'Mohon isi email dan password.',
+            'password.required' => 'Mohon isi email dan password.'
+        ]);
+
+        if (!Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'credentials' => "Terdapat kesalahan pada email/password"
+            ]);
+        }
+
+        request()->session()->regenerate();
+        return redirect()->route('reports.create');
+    }
+
     public function destroy()
     {
         Auth::logout();
