@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 // Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+    Route::get('/admin/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
+    Route::post('/admin/facilities/create', [FacilityController::class, 'store'])->name('facilities.store');
 
     // tambakan route admin report di sini
 });

@@ -17,7 +17,7 @@ class NavLink extends Component
     public function __construct($href)
     {
         $this->href = $href;
-        $this->active = Request::is(ltrim($href, '/'));
+        $this->active = Request::is(trim($href, '/') . '*');
     }
 
     /**

@@ -9,4 +9,12 @@ class Facility extends Model
 {
     /** @use HasFactory<\Database\Factories\FacilityFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'location',
+        'floor',
+        'room_number',
+        'description'
+    ];
 }
