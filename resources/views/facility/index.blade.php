@@ -64,7 +64,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="my-2 px-4">
                     {{ $facilities->links() }}
                 </div>
