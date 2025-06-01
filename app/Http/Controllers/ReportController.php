@@ -24,7 +24,13 @@ class ReportController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = [
+            (object)['id' => 1, 'name' => 'Kerusakan Listrik'],
+            (object)['id' => 2, 'name' => 'Kebocoran Air'],
+            (object)['id' => 3, 'name' => 'Kerusakan AC'],
+            (object)['id' => 4, 'name' => 'Furnitur Rusak'],
+            (object)['id' => 5, 'name' => 'Kebersihan'],
+        ];
         return view('reports.create', compact('categories'));
     }
 

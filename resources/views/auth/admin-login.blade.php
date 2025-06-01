@@ -13,7 +13,7 @@
                 <h2 class="text-xl font-bold">Selamat Datang Kembali!</h2>
                 <p class="text-[#787878] text-sm">Masuk Sekarang untuk mengakses dashboard</p>
             </div>
-            <form action="/login" method="POST" class="space-y-3">
+            <form action="/login/admin" method="POST" class="space-y-3">
                 @csrf
                 <div class="space-y-2">
                     <label for="email" class="block text-sm font-medium">Email</label>
@@ -44,10 +44,6 @@
                     class="w-full bg-[var(--color-red-main)] text-white font-bold py-2 rounded-lg hover:opacity-90">
                     MASUK
                 </button>
-
-                <p class="text-center text-sm">Belum memiliki akun?
-                    <a href="/register" class="text-[var(--color-red-main)] hover:text-[var(--color-dark-red)] hover:underline">Daftar</a>
-                </p>
             </form>
         </div>
     </div>

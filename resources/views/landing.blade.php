@@ -19,8 +19,8 @@
         </div>
 
         <div class="flex items-center gap-2">
-            <a href="{{ route('login') }}" class="text-sm font-semibold text-red-700 border border-red-700 px-4 py-2 rounded-full hover:bg-red-700 hover:text-white transition duration-300">
-                Masuk
+            <a href="{{ route('login.admin') }}" class="text-sm font-semibold text-red-700 border border-red-700 px-4 py-2 rounded-full hover:bg-red-700 hover:text-white transition duration-300">
+                Masuk Sebagai Pegawai
             </a>
             <a href="{{ route('register') }}" class="text-sm font-semibold bg-red-700 text-white px-4 py-2 rounded-full hover:bg-red-800 transition duration-300">
                 Daftar Sekarang
@@ -41,8 +41,8 @@
             </p>
 
             <div class="flex justify-center gap-4">
-                <a href="{{ route('login') }}" class="bg-red-700 text-white font-semibold px-6 py-2 rounded-full shadow hover:bg-red-800 transition">
-                    📢 Laporkan Sekarang
+                <a href="{{ route('login.user') }}" class="bg-red-700 text-white font-semibold px-20 py-2 rounded-full shadow hover:bg-red-800 transition">
+                    Masuk
                 </a>
                 <a href="#permasalahan" class="border border-red-700 text-red-700 font-semibold px-6 py-2 rounded-full hover:bg-red-700 hover:text-white transition">
                     📷 Scan QR Fasilitas
