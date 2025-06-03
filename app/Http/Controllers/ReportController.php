@@ -3,95 +3,119 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
-use App\Models\Category;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan daftar laporan user (atau admin lihat semua)
     public function index()
     {
-        $reports = Report::where('user_id', Auth::id())->latest()->get();
+        $user = Auth::user();
+
+        // Tampilkan laporan yang dibuat user ini saja
+        $reports = Report::with('facility')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->paginate(10);
+
         return view('reports.index', compact('reports'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menampilkan form tambah laporan
     public function create()
     {
-        $categories = [
-            (object)['id' => 1, 'name' => 'Kerusakan Listrik'],
-            (object)['id' => 2, 'name' => 'Kebocoran Air'],
-            (object)['id' => 3, 'name' => 'Kerusakan AC'],
-            (object)['id' => 4, 'name' => 'Furnitur Rusak'],
-            (object)['id' => 5, 'name' => 'Kebersihan'],
-        ];
-        return view('reports.create', compact('categories'));
+        $facilities = Facility::all();
+        return view('reports.create', compact('facilities'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Simpan laporan baru
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'facility_id' => 'required|exists:facilities,id',
             'location' => 'required|string|max:255',
             'description' => 'required|string',
-            'media' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov|max:20480',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,mp4|max:5120', // max 5MB
         ]);
 
-        $path = null;
+        $mediaPath = null;
         if ($request->hasFile('media')) {
-            $path = $request->file('media')->store('reports', 'public');
+            $mediaPath = $request->file('media')->store('reports-media', 'public');
         }
 
         Report::create([
-            'user_id' => Auth::id(),
-            'category_id' => $request->category_id,
-            'location' => $request->location,
-            'description' => $request->description,
-            'media_path' => $path,
-            'status' => 'Menunggu',
+            'facility_id' => $validated['facility_id'],
+            'user_id' => $user->id,
+            'location' => $validated['location'],
+            'description' => $validated['description'],
+            'media_path' => $mediaPath,
+            'status' => 'menunggu',
         ]);
 
-        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dikirim.');
+        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dibuat.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Menampilkan detail laporan
+    public function show(Report $report)
     {
-        //
+        
+        $report->load('facility', 'user');
+        return view('reports.show', compact('report'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Form edit laporan (misal user ingin update)
+    public function edit(Report $report)
     {
-        //
+        
+        $facilities = Facility::all();
+        return view('reports.edit', compact('report', 'facilities'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Update laporan
+    public function update(Request $request, Report $report)
     {
-        //
+        
+
+        $validated = $request->validate([
+            'facility_id' => 'required|exists:facilities,id',
+            'location' => 'required|string|max:255',
+            'description' => 'required|string',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,mp4|max:5120',
+        ]);
+
+        if ($request->hasFile('media')) {
+            if ($report->media_path) {
+                Storage::disk('public')->delete($report->media_path);
+            }
+            $report->media_path = $request->file('media')->store('reports-media', 'public');
+        }
+
+        $report->update([
+            'facility_id' => $validated['facility_id'],
+            'location' => $validated['location'],
+            'description' => $validated['description'],
+            'media_path' => $report->media_path,
+        ]);
+
+        return redirect()->route('reports.index')->with('success', 'Laporan berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Hapus laporan
+    public function destroy(Report $report)
     {
-        //
+
+
+        if ($report->media_path) {
+            Storage::disk('public')->delete($report->media_path);
+        }
+
+        $report->delete();
+
+        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dihapus.');
     }
 }

@@ -43,8 +43,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // User
 Route::middleware(['auth', 'role:user'])->group(function () {
     // Implementasi route user here
-    Route::get('/reports', [ReportController::class, 'create'])->name('reports.create');
-    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::resource('reports', ReportController::class); // Resource route untuk laporan
 
     Route::get('/scan', function () {
         return 'Fitur Scan QR Fasilitas sedang dikembangkan.';
