@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-user')
 
 @section('title', 'Detail Laporan Kerusakan')
 

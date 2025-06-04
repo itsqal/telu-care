@@ -71,12 +71,20 @@ class FacilityController extends Controller
     {
         $facility = Facility::findOrFail($id);
         
-        $url = route('scan.qr'); 
+        $data = [
+            'id' => $facility->id,
+            'name' => $facility->name,
+            'location' => $facility->location,
+        ];
+
+        $jsonString = json_encode($data);
+
+
 
         $renderer = new GDLibRenderer(500);
 
         $writer = new Writer($renderer);
-        $qrImage = $writer->writeString($url);
+        $qrImage = $writer->writeString($jsonString);
     
         return response()->stream(function () use ($qrImage) {
             echo $qrImage;
