@@ -61,7 +61,7 @@ class SessionController extends Controller
         }
 
         request()->session()->regenerate();
-        return redirect()->route('reports.create');
+        return redirect()->route('reports.index');
     }
 
     public function destroy()
