@@ -38,9 +38,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/facility/qr-code/download/{id}', [FacilityController::class, 'downloadQRCode'])->name('facilities.qr-code');
 
-    // tambakan route admin report di sini
-    Route::get('/reports', [ReportFollowUpController::class, 'index'])->name('reports.index');
-    Route::put('/reports/{report}/update-status', [ReportFollowUpController::class, 'updateStatus'])->name('reports.updateStatus');
+// Admin - Manajemen Laporan Lanjut
+Route::prefix('admin/reports')->name('reports.')->group(function () {
+    Route::get('/', [ReportFollowUpController::class, 'index'])->name('index');
+    Route::get('/create', [ReportFollowUpController::class, 'create'])->name('create');
+    Route::post('/', [ReportFollowUpController::class, 'store'])->name('store');
+    Route::get('/{report}', [ReportFollowUpController::class, 'show'])->name('show');
+    Route::get('/{report}/edit', [ReportFollowUpController::class, 'edit'])->name('edit');
+    Route::put('/{report}', [ReportFollowUpController::class, 'update'])->name('update');
+    Route::delete('/{report}', [ReportFollowUpController::class, 'destroy'])->name('destroy');
+    Route::put('/{report}/update-status', [ReportFollowUpController::class, 'updateStatus'])->name('updateStatus');
+    });
 });
 
 // User
