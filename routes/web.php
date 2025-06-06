@@ -38,6 +38,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/facility/qr-code/download/{id}', [FacilityController::class, 'downloadQRCode'])->name('facilities.qr-code');
 
     // tambakan route admin report di sini
+    Route::get('/reports', [ReportFollowUpController::class, 'index'])->name('reports.index');
+    Route::put('/reports/{report}/update-status', [ReportFollowUpController::class, 'updateStatus'])->name('reports.updateStatus');
 });
 
 // User
