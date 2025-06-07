@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportFollowUpController;
 
 
 Route::get('/', function () {
@@ -37,7 +38,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/facility/qr-code/download/{id}', [FacilityController::class, 'downloadQRCode'])->name('facilities.qr-code');
 
-    // tambakan route admin report di sini
+    // Admin - Manajemen Laporan Lanjut
+    Route::prefix('admin/reports')->name('followUp.')->group(function () {
+        Route::get('/', [ReportFollowUpController::class, 'index'])->name('index');
+        Route::get('/create', [ReportFollowUpController::class, 'create'])->name('create');
+        Route::post('/', [ReportFollowUpController::class, 'store'])->name('store');
+        Route::get('/{report}', [ReportFollowUpController::class, 'show'])->name('show');
+        Route::get('/{report}/edit', [ReportFollowUpController::class, 'edit'])->name('edit');
+        Route::put('/{report}', [ReportFollowUpController::class, 'update'])->name('update');
+        Route::delete('/{report}', [ReportFollowUpController::class, 'destroy'])->name('destroy');
+        Route::put('/{report}/update-status', [ReportFollowUpController::class, 'updateStatus'])->name('updateStatus');
+        });
 });
 
 // User
