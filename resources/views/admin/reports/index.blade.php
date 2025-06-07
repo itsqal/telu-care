@@ -63,10 +63,26 @@
                                 <td class="px-4 py-3">{{ $report->user->name }}</td>
                                 <td class="px-4 py-3">{{ $report->facility->room_number }}</td>
                                 <td class="px-4 py-3">{{ $report->description }}</td>
-                                <td class="px-4 py-3">{{ $report->followUp->follow_up_status ?? 'Belum ada tindak lanjut' }}</td>
-                                <td class="px-4 py-3">{{ $report->followUp->follow_up_description ?? 'Belum ada tindak lanjut' }}</td>
+                                <td class="px-4 py-3">
+                                    @if($report->reportFollowUp)
+                                    <span
+                                        class="px-2 py-1 rounded font-semibold text-xs {{ $report->reportFollowUp->follow_up_status == 'diterima' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                        {{ ucfirst($report->reportFollowUp->follow_up_status) }}
+                                    </span>
+                                    @else
+                                    <span class="text-gray-400 italic">Belum ada tindak lanjut</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3">
+                                    @if($report->reportFollowUp)
+                                    <span class="break-words whitespace-pre-line block max-w-xs">{{
+                                        $report->reportFollowUp->follow_up_decsription }}</span>
+                                    @else
+                                    <span class="text-gray-400 italic">Belum ada tindak lanjut</span>
+                                    @endif
+                                </td>
 
-                                <td class="flex justify-around space-x-1 mr-1"> 
+                                <td class="flex justify-around space-x-1 mr-1">
                                     <a href="{{ route('followUp.edit', $report->id) }}"
                                         class="text-white bg-[#FFB700] rounded-lg p-2 my-2 cursor-pointer hover:opacity-90 inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
