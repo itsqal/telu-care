@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('location');
             $table->text('description');
             $table->string('media_path')->nullable();
-            $table->enum('status', ['menunggu', 'diproses', 'selesai'])->default('menunggu');
+            $table->enum('status', ['menunggu', 'diproses', 'selesai', 'ditolak'])->default('menunggu');
             $table->timestamps();
 
             $table->foreign('facility_id')->references('id')->on('facilities')->onDelete('cascade');
