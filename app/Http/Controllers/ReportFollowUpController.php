@@ -12,7 +12,7 @@ class ReportFollowUpController extends Controller
     // Tampilkan semua laporan
     public function index()
     {
-        $reports = Report::with('facility', 'user')->latest()->paginate(10);
+        $reports = Report::with('facility', 'user', 'reportFollowUp')->latest()->paginate(10);
         return view('admin.reports.index', compact('reports'));
     }
 
