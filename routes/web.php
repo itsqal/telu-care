@@ -6,9 +6,17 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportFollowUpController;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('facilities.index');
+        } elseif (Auth::user()->role === 'user') {
+            return redirect()->route('reports.index');
+        }
+    }
     return view('landing');
 })->name('landing');
 

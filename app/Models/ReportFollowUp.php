@@ -8,7 +8,7 @@ class ReportFollowUp extends Model
 {
     protected $fillable = [
         'follow_up_status',
-        'follow_up_description'
+        'follow_up_decsription'
     ];
 
     public function report()

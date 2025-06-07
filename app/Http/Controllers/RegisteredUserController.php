@@ -35,6 +35,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         
-        return redirect()->route('reports.create');
+        return redirect()->route('reports.index');
     }
 }

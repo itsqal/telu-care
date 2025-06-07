@@ -16,65 +16,58 @@
                     @csrf
 
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Fasilitas</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}"
-                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm @error('name') border-red-500 @enderror"
-                            placeholder="Masukkan nama fasilitas">
-                        @error('name')
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Laporan</label>
+                        <select id="report_id" name="report_id" required
+                            class="mt-1 block w-full border-0 ring-1 ring-gray-300 focus:ring-2 focus:ring-red-600 rounded-lg px-4 py-2 bg-gray-50 text-gray-800 shadow-sm transition text-sm">
+                            <option value="">-- Pilih Laporan --</option>
+                            @foreach ($reports as $report)
+                            <option value="{{ $report->id }}" {{ old('report_id')==$report->id ? 'selected' : '' }}>
+                                {{ $report->user->name }} &bull; {{ $report->facility->name }} ({{
+                                $report->facility->location }})
+                                @if($report->description)
+                                &bull; {{ Str::limit($report->description, 40) }}
+                                @endif
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('report_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Gedung /
-                            Lokasi</label>
-                        <input type="text" name="location" id="location" value="{{ old('location') }}"
-                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm @error('location') border-red-500 @enderror"
-                            placeholder="Masukkan lokasi atau gedung">
-                        @error('location')
+                        <label for="follow_up_status" class="block text-sm font-medium text-gray-700 mb-1">Status Tindak
+                            Lanjut</label>
+                        <select id="follow_up_status" name="follow_up_status" required
+                            class="mt-1 block w-full border-0 ring-1 ring-gray-300 focus:ring-2 focus:ring-red-600 rounded-lg px-4 py-2 bg-gray-50 text-gray-800 shadow-sm transition text-sm">
+                            <option value="">-- Pilih Status Tindak Lanjut --</option>
+                            <option value="diterima" class="bg-green-50 text-green-700">Diterima</option>
+                            <option value="ditolak" class="bg-red-50 text-red-700">Ditolak</option>
+                        </select>
+                        @error('follow_up_status')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="floor" class="block text-sm font-medium text-gray-700 mb-1">Lantai</label>
-                        <input type="number" name="floor" id="floor" value="{{ old('floor') }}"
-                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm @error('floor') border-red-500 @enderror"
-                            placeholder="Masukkan nomor lantai">
-                        @error('floor')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="room_number" class="block text-sm font-medium text-gray-700 mb-1">Nomor
-                            Ruangan</label>
-                        <input type="text" name="room_number" id="room_number" value="{{ old('room_number') }}"
-                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm @error('room_number') border-red-500 @enderror"
-                            placeholder="Masukkan nomor ruangan">
-                        @error('room_number')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
-                        <textarea name="description" id="description" rows="2"
-                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm @error('description') border-red-500 @enderror"
-                            placeholder="Masukkan deskripsi fasilitas">{{ old('description') }}</textarea>
-                        @error('description')
+                        <label for="follow_up_decsription"
+                            class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Tindak Lanjut</label>
+                        <input type="text" name="follow_up_decsription" value="{{ old('follow_up_decsription') }}"
+                            class="w-full rounded-lg p-2 border border-[#EFF0F6] focus:ring-1 focus:ring-[var(--color-red-main)] focus:border-[var(--color-red-main)] text-sm"
+                            placeholder="Masukan alasan/deskripsi tindak lanjut laporan">
+                        @error('follow_up_decsription')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4">
-                        <a href="{{ route('facilities.index') }}"
+                        <a href="{{ route('followUp.index') }}"
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                             Batal
                         </a>
                         <button type="submit"
                             class="px-4 py-2 text-sm font-medium text-white bg-[var(--color-red-main)] rounded-lg hover:opacity-90">
-                            Simpan Fasilitas
+                            Simpan Data Tindak Lanjut
                         </button>
                     </div>
                 </form>

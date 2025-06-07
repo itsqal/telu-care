@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('report_follow_ups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('report_id');
+            $table->foreignUuid('report_id');
             $table->enum('follow_up_status', ['diterima', 'ditolak']);
             $table->text('follow_up_description');
             $table->timestamps();
