@@ -43,4 +43,9 @@ class Report extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reportFollowUp()
+    {
+        return $this->hasOne(ReportFollowUp::class);
+    }
 }
