@@ -26,19 +26,26 @@ class ReportFollowUpController extends Controller
     public function store(Request $request)
     {
         // Validasi report_id, follow_up_staus, follow_up_description
-
+        $validated = $request->validate([
+            'report_id' => 'required|exists:reports,id',
+            'follow_up_status' => 'required|in:diterima,ditolak',
+            'follow_up_decsription' => 'required|string',
+        ]);
         // Cari data report dari request()->report_id
+        $report = Report::where('id', $request->report_id)->firstOrFail();
 
-        // Ubah filed status report jadi report->statu = 'diproses'
+        // Ubah field status report jadi report->status = 'diproses'
+        $report->status = 'diproses';
+        $report->save();
 
         // Buat data Report follow up 
         ReportFollowUp::create([
-            'report_id' => request()->report_id,
-            'follow_up_status' => request()->follow_up_status,
-            'follow_up_description' => request()->follow_up_description
+            'report_id' => $request->report_id,
+            'follow_up_status' => $request->follow_up_status,
+            'follow_up_decsription' => $request->follow_up_decsription
         ]);
 
-        return redirect()->route('facilities.index')->with('success', 'Data tindak lanjut berhasil ditambahkan');
+        return redirect()->route('followUp.index')->with('success', 'Data tindak lanjut berhasil ditambahkan');
     }
 
     public function show(Report $report)
@@ -84,6 +91,6 @@ class ReportFollowUpController extends Controller
         }
         $report->delete();
 
-        return redirect()->route('admin.reports.index')->with('success', 'Laporan berhasil dihapus.');
+        return redirect()->route('followUp.index')->with('success', 'Laporan berhasil dihapus.');
     }
 }
