@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('report_id');
             $table->enum('follow_up_status', ['diterima', 'ditolak']);
-            $table->text('follow_up_decsription');
+            $table->text('follow_up_description');
             $table->timestamps();
         });
     }

@@ -44,9 +44,9 @@
                         <thead class="text-xs text-[#667085] font-medium bg-gray-100">
                             <tr class="text-center">
                                 <th scope="col" class="px-4 py-3">No</th>
+                                <th scope="col" class="px-4 py-3">Nama Pelapor</th>
                                 <th scope="col" class="px-4 py-3">Nama Fasilitas</th>
                                 <th scope="col" class="px-4 py-3">Lokasi/Gedung</th>
-                                <th scope="col" class="px-4 py-3">Nama Pelapor</th>
                                 <th scope="col" class="px-4 py-3">Nomor Ruangan</th>
                                 <th scope="col" class="px-4 py-3">Deskripsi Laporan</th>
                                 <th scope="col" class="px-4 py-3">Status Tindak Lanjut</th>
@@ -58,9 +58,9 @@
                             @foreach ($reports as $report)
                             <tr class="hover:bg-gray-50 text-center text-xs text-black">
                                 <td class="px-4 py-3 font-medium text-gray-800">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-3">{{ $report->user->name }}</td>
                                 <td class="px-4 py-3">{{ $report->facility->name }}</td>
                                 <td class="px-4 py-3">{{ $report->facility->location }}</td>
-                                <td class="px-4 py-3">{{ $report->user->name }}</td>
                                 <td class="px-4 py-3">{{ $report->facility->room_number }}</td>
                                 <td class="px-4 py-3">{{ $report->description }}</td>
                                 <td class="px-4 py-3">{{ $report->followUp->follow_up_status ?? 'Belum ada tindak lanjut' }}</td>
